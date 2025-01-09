@@ -14,7 +14,7 @@ Trata-se de uma aplicação web que exibe uma galeria de fotos, permitindo que o
 Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/valeriafillipin/aplication-photogallery).
 
 ## Instruções:
-1. No botão "code", faça download do arquivo em ZIP.
+1. No botão "code", faça download do arquivo em ZIP contendo o arquivo em html, os arquivos em jpg e o README, extraia estes arquivos e salve-os para abertura posterior em seu navegador.
 2. Após o download, no VS Code, use a combinação ctrl + shift + p.
 3. Na aba superior que irá abrir após comando, pesquise por "gitcl" ou git clone.
 4. Selecione "Git Clone".
