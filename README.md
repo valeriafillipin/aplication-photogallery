@@ -19,6 +19,7 @@ Você pode acessar os arquivos do projeto clicando [aqui](https://github.com/val
 3. Na aba superior que irá abrir após comando, pesquise por "gitcl" ou git clone.
 4. Selecione "Git Clone".
 5. Insira a url do repositório e depois selecione o conteúdo baixado no computador.
-6. O documento estará apto para visualização no VS Code.
+6. O documento estará apto para ser aberto no VS Code.
+
 
 ## Deselvolvido por Valéria Fillipin.
