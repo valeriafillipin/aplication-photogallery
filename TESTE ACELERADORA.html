@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos</title>
+</head>
+
+<style>
+
+    body {
+        font-family: 'Jersey 10, Times New Roman';
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: plum;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    main {
+        flex: 1;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .search-bar input {
+        padding: 0.5rem;
+        font-size: 1rem;
+        flex: 1;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .search-bar button {
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        background-color: #ccc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .search-bar button:hover {
+        background-color: whitesmoke;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .photo {
+        text-align: center;
+    }
+
+    .photo img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .photo img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .photo-title {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .no-results {
+        text-align: center;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    footer {
+        background-color: #586;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    @media (max-width: 600px) {
+        header, footer {
+            padding: 0.5rem;
+        }
+
+        .search-bar input {
+            font-size: 0.9rem;
+        }
+
+        .photo-title {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<body>
+    <header>
+        <h1>GALERIA DE FOTOS</h1>
+    </header>
+    <main>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Buscar imagens...">
+            <button onclick="filterImages()">🔍</button>
+        </div>
+        <div id="no-results" style="display: none;">
+            Nenhuma imagem encontrada.
+        </div>
+        <div class="gallery" id="image-array"></div>
+    </main>
+    <footer>
+        © 2025, Galeria de Fotos. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        // fotos estáticas
+        const images = [
+            { thumbnailUrl: "./images/photo01.jpg", title: "Lindinha" },
+            { thumbnailUrl: "./images/photo02.jpg", title: "Namorada do Tom" },
+            { thumbnailUrl: "./images/photo03.jpg", title: "Pernalonga" },
+            { thumbnailUrl: "./images/photo04.jpg", title: "Lizzie McGuire" },
+            { thumbnailUrl: "./images/photo05.jpg", title: "Angélica" },
+            { thumbnailUrl: "./images/photo06.jpg", title: "Bob Esponja" },
+            { thumbnailUrl: "./images/photo07.jpg", title: "Pantera Cor-de-Rosa" },
+            { thumbnailUrl: "./images/photo08.jpg", title: "Marge Simpson" },
+            { thumbnailUrl: "./images/photo09.jpg", title: "Regina Rocket" },
+            { thumbnailUrl: "./images/photo10.jpg", title: "Snoopy" },
+            { thumbnailUrl: "./images/photo11.jpg", title: "Coragem" },
+            { thumbnailUrl: "./images/photo12.jpg", title: "BMO" },
+            { thumbnailUrl: "./images/photo13.jpg", title: "Cintia" },
+            { thumbnailUrl: "./images/photo14.jpg", title: "Salsicha e Scooby" },
+
+        ];
+
+        // selecionar elementos HTML
+        const gallery = document.querySelector("#image-array");
+        const searchInput = document.getElementById("search");
+        const noResults = document.getElementById("no-results");
+
+        // exibição das fotos
+        function displayImages(imagesToDisplay) {
+            gallery.innerHTML = ""; // limpa o conteúdo anterior
+            if (imagesToDisplay.length === 0) {
+                noResults.style.display = "block"; // mostra mensagem de "nenhum resultado"
+            } else {
+                noResults.style.display = "none"; // esconde mensagem de "nenhum resultado"
+                imagesToDisplay.forEach((image) => {
+                    const imageElement = document.createElement("div");
+                    imageElement.className = "photo";
+                    imageElement.innerHTML = `
+                        <img src="${image.thumbnailUrl}" alt="${image.title}">
+                        <div class="photo-title">${image.title}</div>
+                    `;
+                    gallery.appendChild(imageElement);
+                });
+            }
+        }
+
+        // filtrar fotos
+        function filterImages() {
+            const query = searchInput.value.toLowerCase();
+            const filteredImages = images.filter((image) =>
+                image.title.toLowerCase().includes(query)
+            );
+            displayImages(filteredImages);
+        }
+
+        // busca em tempo real
+        searchInput.addEventListener("input", filterImages);
+
+        // carregar as fotos ao inicializar a página
+        displayImages(images);
+    </script>
+</body>
+
+</html>
